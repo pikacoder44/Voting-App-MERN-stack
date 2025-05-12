@@ -1,15 +1,17 @@
 # 🗳️ Voting App (MERN Stack)
 
-This is a simple full-stack Voting Application built using the MERN stack (MongoDB, Express.js, React.js, Node.js). It includes user authentication, admin-controlled candidate management, and secure voting functionality.
+This is a simple full-stack Voting Application built using the MERN stack (Except ReactJS maybe it will be updated soon). It includes user authentication, admin-controlled candidate management and creation, and secure voting functionality.
 
 ## 📦 Tech Stack
 
 - Node.js
 - Express.js
 - MongoDB
-- Mongoose (ODM)
+- Mongoose
 - JSON Web Tokens (JWT)
 - Bcrypt.js (for password hashing)
+- Body Parser
+- dotenv
 
 ## 🚀 Features
 
@@ -56,8 +58,8 @@ This is a simple full-stack Voting Application built using the MERN stack (Mongo
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/voting-app-mern.git
-   cd voting-app-mern
+   git clone https://github.com/pikacoder44/Voting-App-MERN-stack.git
+   cd Voting-App-MERN-stack
 
    ```
 
@@ -73,7 +75,7 @@ This is a simple full-stack Voting Application built using the MERN stack (Mongo
 
 4. Run the server:
 
-   npm start
+   nodemon ./server.js
 
 # 🧪 Testing the API
 
@@ -81,9 +83,9 @@ Use tools like Postman or Insomnia to test endpoints. Make sure to include JWT t
 
 # ⚠️ Notes
 
-Each user can vote only once.
-
-Admin access should be protected using role-based middleware (not included here).
+- Each user can vote only once.
+- Only Admin can Add, Update and Delete candidates.
+- Admin cannot vote.
 
 # 📄 License
 
