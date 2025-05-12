@@ -69,16 +69,20 @@ This is a simple full-stack Voting Application built using the MERN stack (Mongo
 
 4. Run the server:
 
-    npm start
+   npm start
 
 # 🧪 Testing the API
+
 Use tools like Postman or Insomnia to test endpoints. Make sure to include JWT tokens in Authorization headers for protected routes.
 
 # ⚠️ Notes
+
 Each user can vote only once.
 
 Admin access should be protected using role-based middleware (not included here).
 
 # 📄 License
+
 This project is open-source and available under the MIT License.
 
+![App Flowchart](./Flowchart.png)
