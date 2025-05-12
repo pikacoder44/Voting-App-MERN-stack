@@ -9,7 +9,7 @@ const { jwtAuthMiddleware, generateToken } = require("../jwt");
 const checkAdminRole = async (userId) => {
   try {
     const user = await User.findById(userId);
-    if (user.role === "admin")  {
+    if (user.role === "admin") {
       return true;
     } else {
       return false;
@@ -90,10 +90,86 @@ router.delete("/:candidateId", jwtAuthMiddleware, async (req, res) => {
   }
 });
 
-
-
 // Vote Casting:
+router.post("/vote/:candidateId", jwtAuthMiddleware, async (req, res) => {
+  // No admin can vote
+  // One user can only vote once
 
+  candidateId = req.params.candidateId;
+  userId = req.user.id;
+  try {
+    // Find Candidate document by id:
+    const candidate = await Candidate.findById(candidateId);
+    if (!candidate) {
+      res.status(404).json({ error: "Candidate Not Found" });
+    }
 
+    // Find user doc by user id:
+
+    const user = await User.findById(userId);
+
+    // Check if user is in db:
+    if (!user) res.status(404).json({ error: "User Not Found" });
+
+    // Admin check:
+    if (user.role === "admin")
+      return res.status(403).json({ error: "Admin can't vote" });
+
+    // Check if user voted or not:
+    if (user.isVoted) return res.status(400).json({ error: "Already voted" });
+
+    // Update Candidate document to record the vote:
+    candidate.votes.push({ user: userId });
+    candidate.voteCount++;
+    await candidate.save();
+
+    // Update user document:
+    user.isVoted = true;
+    await user.save();
+
+    res.status(200).json({ message: "Vote Casted Successfully" });
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: " Internal server error" });
+  }
+});
+
+// Vote Count:
+router.get("/vote/count", async (req, res) => {
+  try {
+    const candidate = await Candidate.find().sort({ voteCount: "desc" });
+
+    // Map the candidates to only return their name and vote Count:
+    const voteRecord = candidate.map((data) => {
+      return {
+        party: data.party,
+        count: data.voteCount,
+      };
+    });
+
+    return res.status(200).json(voteRecord);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: " Internal server error" });
+  }
+});
+
+// List of Candidates:
+router.get("/candidates", async (req, res) => {
+  try {
+    const candidateData = await Candidate.find().sort({ name: "asc" });
+
+    const list = candidateData.map((data) => {
+      return {
+        name: data.name,
+        party: data.party,
+      };
+    });
+    return res.status(200).json(list);
+  } catch (err) {
+    console.log(err);
+    res.status(500).json({ message: " Internal server error" });
+  }
+});
 
 module.exports = router;
