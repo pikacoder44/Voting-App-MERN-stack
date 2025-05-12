@@ -69,9 +69,9 @@ This is a simple full-stack Voting Application built using the MERN stack (Excep
 
 3. Setup environment variables in a .env file:
 
-   MONGODB_LOCAL=your_mongodb_connection_string
-   JWT_SECRET=your_secret_key
-   PORT=3000
+- MONGODB_LOCAL: Your connection string for MongoDB (e.g., from MongoDB Atlas or localhost).
+- JWT_SECRET: Any random string used to sign your tokens (keep it secret).
+- PORT: The port your server will run on (default is 3000).
 
 4. Run the server:
 
