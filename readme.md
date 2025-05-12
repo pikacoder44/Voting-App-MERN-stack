@@ -47,6 +47,10 @@ This is a simple full-stack Voting Application built using the MERN stack (Mongo
 | PUT    | /candidate/:candidateId | Update candidate details |
 | DELETE | /candidate/:candidateId | Delete a candidate       |
 
+## 🧩 App Flowchart
+
+![App Flowchart](./Flowchart.png)
+
 ## 🛠️ Installation
 
 1. Clone the repository:
@@ -84,5 +88,3 @@ Admin access should be protected using role-based middleware (not included here)
 # 📄 License
 
 This project is open-source and available under the MIT License.
-
-![App Flowchart](./Flowchart.png)
