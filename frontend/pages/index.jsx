@@ -25,6 +25,7 @@ const Index = () => {
             src={"/log_in.svg"}
             width={250}
             height={250}
+            alt="Image"
           ></Image>
 
           <div className="p-5">
@@ -46,6 +47,7 @@ const Index = () => {
             src={"/verified_cand.svg"}
             width={250}
             height={250}
+            alt="Image"
           ></Image>
 
           <div className="p-5">
@@ -67,6 +69,7 @@ const Index = () => {
             src={"/vote-count.svg"}
             width={250}
             height={250}
+            alt="Image"
           ></Image>
 
           <div className="p-5">
@@ -83,7 +86,12 @@ const Index = () => {
         </div>
         {/* Card #4 */}
         <div className="max-w-sm p-6 bg-white border border-gray-200 rounded-lg shadow-sm dark:bg-gray-800 dark:border-gray-700 flex flex-col justify-center items-center">
-          <Image src={"/security.svg"} width={250} height={250}></Image>
+          <Image
+            src={"/security.svg"}
+            width={250}
+            height={250}
+            alt="Image"
+          ></Image>
 
           <div className="p-5">
             <a href="#">
@@ -108,7 +116,9 @@ const Index = () => {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-10">
             {/* Step 1 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow hover:shadow-md transition">
-                <h4 className="text-2xl text-white font-bold uppercase mb-2">Step 1</h4>
+              <h4 className="text-2xl text-white font-bold uppercase mb-2">
+                Step 1
+              </h4>
               <div className="text-blue-500 mb-4">
                 <svg
                   className="w-16 h-16 mx-auto"
@@ -134,7 +144,9 @@ const Index = () => {
 
             {/* Step 2 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow hover:shadow-md transition">
-              <h4 className="text-2xl text-white font-bold uppercase mb-2">Step 2</h4>
+              <h4 className="text-2xl text-white font-bold uppercase mb-2">
+                Step 2
+              </h4>
               <div className="text-blue-500 mb-4">
                 <svg
                   className="w-16 h-16 mx-auto"
@@ -160,7 +172,9 @@ const Index = () => {
 
             {/* Step 3 */}
             <div className="bg-gray-800 p-6 rounded-lg shadow hover:shadow-md transition">
-              <h4 className="text-2xl text-white font-bold uppercase mb-2">Step 3</h4>
+              <h4 className="text-2xl text-white font-bold uppercase mb-2">
+                Step 3
+              </h4>
               <div className="text-blue-500 mb-4">
                 <svg
                   className="w-16 h-16 mx-auto"
