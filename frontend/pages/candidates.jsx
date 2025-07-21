@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
-
+import { useRouter } from "next/navigation";
 const Candidates = () => {
   const [candidates, setCandidates] = useState([]);
   const [token, setToken] = useState(null); // Store token after checking window
 
+  const router = useRouter();
   useEffect(() => {
     // This will only run on client
     if (typeof window !== "undefined") {
@@ -71,6 +72,8 @@ const Candidates = () => {
       } else {
         alert("Vote cast successfully!");
       }
+
+      router.refresh();
     } catch (error) {
       console.error("Vote error:", error);
       alert("An error occurred while voting.");

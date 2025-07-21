@@ -16,36 +16,43 @@ const checkAdmin = async () => {
   }
 };
 
-// Post route for Person
 router.post("/signup", async (req, res) => {
   try {
-    console.log("Incoming request body: ", req.body); // 👈 Add this
-    const data = req.body; // Assuming req.body contains the new User data
+    const data = req.body;
 
-    if (req.body.role === "admin" && (await checkAdmin())) {
-      console.log("Only one admin allowed");
-      return res.status(403).json({ message: "Only one admin allowed" });
-    }
-    if (req.body.specialkey == process.env.JWT_SECRET) {
-      // Create a new User document using Mongoose model
+    // Admin signup
+    if (req.body.role === "admin") {
+      if (await checkAdmin()) {
+        return res.status(403).json({ message: "Only one admin allowed" });
+      }
+
+      if (req.body.specialkey !== process.env.JWT_SECRET) {
+        return res.status(403).json({ message: "Special key is invalid" });
+      }
+
+      // Create admin
       const newUser = new User(data);
-
-      // Save the new User document to the database
       const response = await newUser.save();
-      console.log("Data Saved");
 
-      const payload = {
-        id: response.id,
-      };
-      console.log(JSON.stringify(payload));
+      const payload = { id: response.id };
       const token = generateToken(payload);
-      console.log("Token is: ", token);
 
-      res.status(200).json({ response: response, token: token });
-    } else {
-      console.log("Special key is invalid");
-      return res.status(403).json({ message: "Special key is invalid" });
+      return res.status(200).json({ response, token });
     }
+
+    // Voter signup (no special key needed)
+    if (req.body.role === "voter") {
+      const newUser = new User(data);
+      const response = await newUser.save();
+
+      const payload = { id: response.id };
+      const token = generateToken(payload);
+
+      return res.status(200).json({ response, token });
+    }
+
+    // Other roles not allowed
+    return res.status(400).json({ message: "Invalid role" });
   } catch (err) {
     console.log("Error: ", err);
     res.status(500).json({ error: "Internal Server Error" });

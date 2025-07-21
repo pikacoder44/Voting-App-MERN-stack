@@ -22,9 +22,9 @@ const Signup = () => {
         cnic: cnic,
         password: password,
         role: role,
-        ...(role === "admin" && { specialkey })
+        ...(role === "admin" && { specialkey }),
       };
-     
+
       const response = await fetch("http://localhost:5000/user/signup", {
         method: "POST",
         headers: {
@@ -186,9 +186,13 @@ const Signup = () => {
                   id="admin-cb"
                   type="checkbox"
                   checked={role === "admin"}
-                  onChange={(e) =>
-                    setRole(e.target.checked ? "admin" : "voter")
-                  }
+                  onChange={(e) => {
+                    const isAdmin = e.target.checked;
+                    setRole(isAdmin ? "admin" : "voter");
+                    if (!isAdmin) {
+                      setSpecialKey(""); // Reset special key if user unchecks Admin
+                    }
+                  }}
                   className="peer appearance-none w-11 h-5 bg-slate-100 rounded-full checked:bg-slate-800 cursor-pointer transition-colors duration-300"
                 />
                 <label

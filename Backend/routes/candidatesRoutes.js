@@ -116,7 +116,11 @@ router.post("/vote/:candidateId", jwtAuthMiddleware, async (req, res) => {
       return res.status(403).json({ error: "Admin can't vote" });
 
     // Check if user voted or not:
-    if (user.isVoted) return res.status(400).json({ error: "Already voted" });
+    // Check if user already voted by scanning all candidates
+    const alreadyVoted = await Candidate.findOne({ "votes.user": userId });
+    if (alreadyVoted) {
+      return res.status(400).json({ error: "You have already voted!" });
+    }
 
     // Update Candidate document to record the vote:
     candidate.votes.push({ user: userId });
