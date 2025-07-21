@@ -4,6 +4,7 @@ import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import "@/styles/globals.css";
 import { useEffect } from "react";
+import { jwtDecode } from "jwt-decode";
 
 const MyApp = ({ Component, pageProps }) => {
   useEffect(() => {

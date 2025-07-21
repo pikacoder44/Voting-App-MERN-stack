@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-import { jwtDecode } from "jwt-decode";
-import Link from "next/link";
+import React, { useState } from "react";
 
 const Signup = () => {
   let [name, setName] = useState("");
@@ -10,7 +8,7 @@ const Signup = () => {
   let [cnic, setCnic] = useState("");
   let [password, setPassword] = useState("");
   let [role, setRole] = useState("voter");
-
+  let [specialkey, setSpecialKey] = useState("");
   // Code to Register User:
 
   const registerUser = async () => {
@@ -24,7 +22,9 @@ const Signup = () => {
         cnic: cnic,
         password: password,
         role: role,
+        ...(role === "admin" && { specialkey })
       };
+     
       const response = await fetch("http://localhost:5000/user/signup", {
         method: "POST",
         headers: {
@@ -40,7 +40,6 @@ const Signup = () => {
         if (typeof window !== "undefined" && data.token) {
           localStorage.setItem("token", data.token);
         }
-        console.log("Returned token:", data.token);
       } else {
         alert("❌ Signup failed");
         console.error("Server Error:", data);
@@ -184,7 +183,7 @@ const Signup = () => {
               </label>
               <div className="relative inline-block w-11 h-5">
                 <input
-                  id="admin"
+                  id="admin-cb"
                   type="checkbox"
                   checked={role === "admin"}
                   onChange={(e) =>
@@ -197,6 +196,22 @@ const Signup = () => {
                   className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer"
                 ></label>
               </div>
+              {role === "admin" && (
+                <div
+                  id="special"
+                  className="bg-green-500 text-white p-2 rounded-md"
+                >
+                  <label htmlFor="spec_key">Enter Special Key: </label>
+                  <input
+                    className="bg-white rounded-md border border-black text-black"
+                    type="password"
+                    name="spec_key"
+                    id="spec_key"
+                    value={specialkey}
+                    onChange={(e) => setSpecialKey(e.target.value)}
+                  />
+                </div>
+              )}
             </div>
 
             {/* Register Button */}
@@ -209,13 +224,13 @@ const Signup = () => {
                 Register Account
               </button>
               <div className="text-center">
-                  <a
-                    className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
-                    href="/login"
-                  >
-                    Already have an account? Login!
-                  </a>
-                </div>
+                <a
+                  className="inline-block text-sm text-blue-500 dark:text-blue-500 align-baseline hover:text-blue-800"
+                  href="/login"
+                >
+                  Already have an account? Login!
+                </a>
+              </div>
             </div>
           </form>
         </div>

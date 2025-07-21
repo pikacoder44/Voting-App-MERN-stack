@@ -19,28 +19,33 @@ const checkAdmin = async () => {
 // Post route for Person
 router.post("/signup", async (req, res) => {
   try {
-     console.log("Incoming request body: ", req.body); // 👈 Add this
+    console.log("Incoming request body: ", req.body); // 👈 Add this
     const data = req.body; // Assuming req.body contains the new User data
 
     if (req.body.role === "admin" && (await checkAdmin())) {
       console.log("Only one admin allowed");
       return res.status(403).json({ message: "Only one admin allowed" });
     }
-    // Create a new User document using Mongoose model
-    const newUser = new User(data);
+    if (req.body.specialkey == process.env.JWT_SECRET) {
+      // Create a new User document using Mongoose model
+      const newUser = new User(data);
 
-    // Save the new User document to the database
-    const response = await newUser.save();
-    console.log("Data Saved");
+      // Save the new User document to the database
+      const response = await newUser.save();
+      console.log("Data Saved");
 
-    const payload = {
-      id: response.id,
-    };
-    console.log(JSON.stringify(payload));
-    const token = generateToken(payload);
-    console.log("Token is: ", token);
+      const payload = {
+        id: response.id,
+      };
+      console.log(JSON.stringify(payload));
+      const token = generateToken(payload);
+      console.log("Token is: ", token);
 
-    res.status(200).json({ response: response, token: token });
+      res.status(200).json({ response: response, token: token });
+    } else {
+      console.log("Special key is invalid");
+      return res.status(403).json({ message: "Special key is invalid" });
+    }
   } catch (err) {
     console.log("Error: ", err);
     res.status(500).json({ error: "Internal Server Error" });
@@ -51,7 +56,7 @@ router.post("/signup", async (req, res) => {
 router.post("/login", async (req, res) => {
   try {
     // Extract CNIC & Password from body:
-    const { cnic, password } = req.body;
+    const { cnic, password, role, specialkey } = req.body;
 
     // Find user by CNIC:
     const user = await User.findOne({ cnic: cnic });
@@ -59,6 +64,14 @@ router.post("/login", async (req, res) => {
     // If user doens't exist or password is not right:
     if (!user || !(await user.comparePassword(password))) {
       return res.status(401).json({ error: "Invalid CNIC or password" });
+    }
+    // Check admin Legitmacy:
+    if (role === "admin") {
+      if (specialkey !== process.env.JWT_SECRET) {
+        return res
+          .status(403)
+          .json({ message: "Invalid Special Key for Admin" });
+      }
     }
     // Generate Token:
     const payload = {

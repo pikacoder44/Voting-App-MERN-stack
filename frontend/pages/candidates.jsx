@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import { jwtDecode } from "jwt-decode";
 
-
 const Candidates = () => {
   const [candidates, setCandidates] = useState([]);
   const [token, setToken] = useState(null); // Store token after checking window
@@ -28,28 +27,27 @@ const Candidates = () => {
   }, []);
 
   const checkTokenExpiry = () => {
-  const token = localStorage.getItem("token");
+    const token = localStorage.getItem("token");
 
-  if (!token) {
-    console.log("Token is missing");
-    return false;
-  }
+    if (!token) {
+      console.log("Token is missing");
+      return false;
+    }
 
-  try {
-    const decoded = jwtDecode(token);
-    const now = Date.now() / 1000;
-    const isExpired = decoded.exp < now;
+    try {
+      const decoded = jwtDecode(token);
+      const now = Date.now() / 1000;
+      const isExpired = decoded.exp < now;
 
-    console.log("Token decoded:", decoded);
-    console.log("Now:", now, "Exp:", decoded.exp, "Expired:", isExpired);
+      console.log("Token decoded:", decoded);
+      console.log("Now:", now, "Exp:", decoded.exp, "Expired:", isExpired);
 
-    return !isExpired;
-  } catch (error) {
-    console.error("Error decoding token:", error);
-    return false;
-  }
-};
-
+      return !isExpired;
+    } catch (error) {
+      console.error("Error decoding token:", error);
+      return false;
+    }
+  };
 
   const voteCast = async (id) => {
     if (!checkTokenExpiry()) {
@@ -92,9 +90,11 @@ const Candidates = () => {
             <p>Age: {item.age}</p>
             <p>Party: {item.party}</p>
             <p>Vote Count: {item.voteCount}</p>
+
             <button
               onClick={() => voteCast(item._id)}
-              className="bg-blue-500 cursor-pointer hover:bg-blue-700 py-1 px-3 rounded-md"
+              disabled={!checkTokenExpiry()}
+              className="bg-blue-500 cursor-pointer hover:bg-blue-700 py-1 px-3 rounded-md disabled:bg-gray-600 "
             >
               Vote
             </button>
