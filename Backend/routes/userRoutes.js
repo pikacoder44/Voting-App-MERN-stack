@@ -83,6 +83,8 @@ router.post("/login", async (req, res) => {
     // Generate Token:
     const payload = {
       id: user.id,
+      role: user.role,
+      isVoted: user.isVoted,
     };
 
     const token = generateToken(payload);

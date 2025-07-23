@@ -1,44 +1,68 @@
-// Navbar.jsx
 import Link from "next/link";
 import { useRouter } from "next/router";
+import Profile from "./Profile";
+import { useState, useEffect, useRef } from "react";
 
 const Navbar = () => {
   const router = useRouter();
   const currentRoute = router.pathname;
+  const [openProfile, setOpenProfile] = useState(false);
+  const profileRef = useRef();
 
   const navItems = [
     { name: "Home", path: "/" },
     { name: "Candidates", path: "/candidates" },
     { name: "Login/Signup", path: "/signup" },
-    { name: "Profile", path: "/profile" },
   ];
+
+  // Close dropdown on outside click
+  useEffect(() => {
+    const handleClickOutside = (e) => {
+      if (profileRef.current && !profileRef.current.contains(e.target)) {
+        setOpenProfile(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, []);
+
+  // Function to close profile dropdown, passed to Profile component
+  const handleCloseProfile = () => {
+    setOpenProfile(false);
+  };
 
   return (
     <nav className="bg-white border-gray-200 dark:bg-gray-900">
-      <div className="w-full flex flex-wrap items-center justify-between mx-auto p-5">
-        <Link href="/" className="flex items-center space-x-3 rtl:space-x-reverse">
-          <span className="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">
-            GOVT VOTING
-          </span>
+      <div className="flex flex-wrap items-center justify-between mx-auto p-5">
+        <Link href="/" className="text-2xl font-semibold dark:text-white">
+          GOVT VOTING
         </Link>
 
-        <div className="hidden w-full md:block md:w-auto" id="navbar-default">
-          <ul className="font-medium flex flex-col p-4 md:p-0 mt-4 border rounded-lg bg-gray-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900">
-            {navItems.map((item) => (
-              <li key={item.path}>
-                <Link
-                  href={item.path}
-                  className={`block py-2 px-3 rounded-sm md:p-0 ${
-                    currentRoute === item.path
-                      ? "text-white bg-blue-700 md:bg-transparent md:text-blue-700 dark:text-white md:dark:text-blue-500"
-                      : "text-gray-900 hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 dark:text-white md:dark:hover:text-blue-500 dark:hover:text-white"
-                  }`}
-                >
-                  {item.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
+        <div className="hidden md:flex md:items-center space-x-6">
+          {navItems.map((item) => (
+            <Link
+              key={item.path}
+              href={item.path}
+              className={`py-2 px-3 rounded-sm ${
+                currentRoute === item.path
+                  ? "text-blue-700 font-semibold"
+                  : "text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500"
+              }`}
+            >
+              {item.name}
+            </Link>
+          ))}
+
+          {/* Profile Dropdown Trigger */}
+          <div className="relative" ref={profileRef}>
+            <button
+              onClick={() => setOpenProfile((prev) => !prev)}
+              className="py-2 px-3 rounded-sm text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500"
+            >
+              Profile ▾
+            </button>
+            {openProfile && <Profile onClose={handleCloseProfile} />}
+          </div>
         </div>
       </div>
     </nav>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Link from "next/link";
 const Login = () => {
   const [cnic, setCnic] = useState("");
   const [password, setPassword] = useState("");
@@ -130,9 +130,11 @@ const Login = () => {
             <button
               type="button"
               onClick={loginUser}
-              className="w-full px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 font-semibold transition"
+              className="w-full cursor-pointer px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 font-semibold transition"
             >
+              <Link href={"/"}>
               Login
+              </Link>
             </button>
           </div>
         </form>
