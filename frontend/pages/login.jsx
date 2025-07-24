@@ -1,11 +1,12 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import { useRouter } from "next/router";
 const Login = () => {
   const [cnic, setCnic] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("voter");
   const [specialkey, setSpecialKey] = useState("");
-
+  const router = useRouter();
   // Login Function:
   const loginUser = async () => {
     try {
@@ -27,6 +28,7 @@ const Login = () => {
         if (typeof window !== "undefined" && data.token) {
           localStorage.setItem("token", data.token);
         }
+        router.push("/candidates")
       } else {
         alert(`❌ Login Failed: ${data.message || "Unknown error"}`);
       }
@@ -132,9 +134,7 @@ const Login = () => {
               onClick={loginUser}
               className="w-full cursor-pointer px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 font-semibold transition"
             >
-              <Link href={"/"}>
-              Login
-              </Link>
+              <Link href={"/"}>Login</Link>
             </button>
           </div>
         </form>

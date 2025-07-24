@@ -1,10 +1,10 @@
 import React, { useState } from "react";
-import { useRouter } from "next/router"; // ✅ Import router
+import { useRouter } from "next/router"; 
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const router = useRouter(); // ✅ Use router hook
+  const router = useRouter(); 
 
   const updPassword = async () => {
     const token = localStorage.getItem("token");

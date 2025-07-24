@@ -41,6 +41,18 @@ router.post("/", jwtAuthMiddleware, async (req, res) => {
   }
 });
 
+//Get data of single Candidate:
+router.get("/:candidateId", async (req, res) => {
+  try {
+    const candidateId = req.params.candidateId;
+    const response = await Candidate.findById(candidateId);
+    console.log("Candidate Found");
+    res.status(200).json({ response });
+  } catch (err) {
+    res.status(403).json({ error: "Candidate not found!" });
+  }
+});
+
 // Update Method:
 router.put("/:candidateId", jwtAuthMiddleware, async (req, res) => {
   try {

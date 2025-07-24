@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useRouter } from "next/router";
 import Link from "next/link";
 const Signup = () => {
   let [name, setName] = useState("");
@@ -9,6 +10,7 @@ const Signup = () => {
   let [password, setPassword] = useState("");
   let [role, setRole] = useState("voter");
   let [specialkey, setSpecialKey] = useState("");
+  const router = useRouter();
   // Code to Register User:
 
   const registerUser = async () => {
@@ -40,6 +42,7 @@ const Signup = () => {
         if (typeof window !== "undefined" && data.token) {
           localStorage.setItem("token", data.token);
         }
+        router.push("/candidates");
       } else {
         alert("❌ Signup failed");
         console.error("Server Error:", data);

@@ -59,6 +59,15 @@ const UserProfile = () => {
             <div>
               <span className="font-semibold">CNIC:</span> {user.cnic || "—"}
             </div>
+            <div>
+              {user.role === "admin" ? (
+                <span className="font-bold text-red-500">{user.role}</span>
+              ) : (
+                <span className="font-bold text-blue-600">
+                  {user.role || "—"}
+                </span>
+              )}
+            </div>
           </div>
         )}
       </div>
