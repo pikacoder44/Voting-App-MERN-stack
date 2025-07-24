@@ -30,6 +30,37 @@ This is a simple full-stack Voting Application built using the **MERN stack**. I
 
 ---
 
+## 🧩 API Endpoints
+
+### 🧑 User Routes
+
+| Method | Endpoint          | Description                    |
+| ------ | ----------------- | ------------------------------ |
+| POST   | /signup           | Register a new user            |
+| POST   | /login            | User login and token retrieval |
+| GET    | /profile          | Get current user profile       |
+| PUT    | /profile/password | Update user password           |
+
+### 🗳️ Voter Routes
+
+| Method | Endpoint           | Description                |
+| ------ | ------------------ | -------------------------- |
+| GET    | /candidates        | Get list of all candidates |
+| POST   | /vote/:candidateId | Vote for a candidate       |
+| GET    | /vote/count        | Get current vote counts    |
+
+### 👨‍💼 Admin Routes
+
+| Method | Endpoint                | Description              |
+| ------ | ----------------------- | ------------------------ |
+| POST   | /candidates             | Add a new candidate      |
+| PUT    | /candidate/:candidateId | Update candidate details |
+| DELETE | /candidate/:candidateId | Delete a candidate       |
+
+## 🧩 App Flowchart
+
+![App Flowchart](./Backend/Flowchart.png)
+
 ## 🧩 Project Structure
 
 The app has two main folders:
@@ -78,3 +109,13 @@ USERNAME
 PASSWORD
 MONGODB_URL
 ```
+
+# ⚠️ Notes
+
+- Each user can vote only once.
+- Only Admin can Add, Update and Delete candidates.
+- Admin cannot vote.
+
+# 📄 License
+
+This project is open-source and available under the MIT License.
