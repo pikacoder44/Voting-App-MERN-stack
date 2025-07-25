@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 const Candidates = () => {
   const [candidates, setCandidates] = useState([]);
   const [token, setToken] = useState(null); // Store token after checking window
+  const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
   const router = useRouter();
   useEffect(() => {
@@ -17,7 +18,7 @@ const Candidates = () => {
 
     const fetchCandidate = async () => {
       try {
-        const response = await fetch("http://localhost:5000/candidate/");
+        const response = await fetch(`${API_BASE}/candidate/`);
         const data = await response.json();
         setCandidates(data);
       } catch (error) {
@@ -56,7 +57,7 @@ const Candidates = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/candidate/vote/${id}`, {
+      const res = await fetch(`${API_BASE}/candidate/vote/${id}`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -177,7 +178,7 @@ const Candidates = () => {
     }
 
     try {
-      const res = await fetch(`http://localhost:5000/candidate/${id}`, {
+      const res = await fetch(`${API_BASE}/candidate/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${token}`,

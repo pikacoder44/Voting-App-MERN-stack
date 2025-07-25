@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+
 const Signup = () => {
   let [name, setName] = useState("");
   let [age, setAge] = useState("");
@@ -27,7 +29,7 @@ const Signup = () => {
         ...(role === "admin" && { specialkey }),
       };
 
-      const response = await fetch("http://localhost:5000/user/signup", {
+      const response = await fetch(`${API_BASE}/user/signup`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

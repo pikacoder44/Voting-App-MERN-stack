@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from "react";
 import { useRouter } from "next/router";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const Addcandidate = () => {
   const [name, setName] = useState("");
   const [party, setParty] = useState("");
   const [age, setAge] = useState("");
   const [token, setToken] = useState(null);
   const router = useRouter();
+
   useEffect(() => {
     if (typeof window !== "undefined") {
       const storedToken = localStorage.getItem("token");
@@ -15,7 +17,7 @@ const Addcandidate = () => {
   const regUser = async () => {
     const payload = { name, party, age };
     try {
-      const result = await fetch("http://localhost:5000/candidate", {
+      const result = await fetch(`${API_BASE}/candidate`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+
 const Login = () => {
   const [cnic, setCnic] = useState("");
   const [password, setPassword] = useState("");
@@ -13,7 +15,7 @@ const Login = () => {
       const payload = { cnic, password, role, specialkey };
       if (role === "admin") payload.specialkey = specialkey;
 
-      const result = await fetch("http://localhost:5000/user/login", {
+      const result = await fetch(`${API_BASE}/user/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -28,7 +30,7 @@ const Login = () => {
         if (typeof window !== "undefined" && data.token) {
           localStorage.setItem("token", data.token);
         }
-        router.push("/candidates")
+        router.push("/candidates");
       } else {
         alert(`❌ Login Failed: ${data.message || "Unknown error"}`);
       }

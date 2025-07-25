@@ -1,6 +1,7 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 const CandidatePage = () => {
   const [name, setName] = useState("");
   const [party, setParty] = useState("");
@@ -11,7 +12,7 @@ const CandidatePage = () => {
 
   useEffect(() => {
     if (candidateId) {
-      fetch(`http://localhost:5000/candidate/${candidateId}`)
+      fetch(`${API_BASE}/candidate/${candidateId}`)
         .then((res) => res.json())
         .then((data) => setCandidate(data.response))
         .catch((err) => console.error(err));
@@ -31,7 +32,7 @@ const CandidatePage = () => {
     try {
       const payload = { name, party, age };
       const response = await fetch(
-        `http://localhost:5000/candidate/${candidateId}`,
+        `${API_BASE}/candidate/${candidateId}`,
         {
           method: "PUT",
           headers: {

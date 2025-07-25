@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useRouter } from "next/router"; 
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 const ChangePassword = () => {
   const [oldPassword, setOldPassword] = useState("");
@@ -10,7 +11,7 @@ const ChangePassword = () => {
     const token = localStorage.getItem("token");
     try {
       const response = await fetch(
-        "http://localhost:5000/user/profile/password",
+        `${API_BASE}/user/profile/password`,
         {
           method: "PUT",
           headers: {

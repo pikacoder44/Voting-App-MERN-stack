@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
 const UserProfile = () => {
   const [user, setUser] = useState({});
@@ -8,7 +9,7 @@ const UserProfile = () => {
 
     const fetchUserProfile = async () => {
       try {
-        const response = await fetch("http://localhost:5000/user/profile", {
+        const response = await fetch(`${API_BASE}/user/profile`, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
