@@ -3,15 +3,15 @@ import Link from "next/link";
 import Image from "next/image";
 const Index = () => {
   return (
-    <div className="fade-zoom-in bg-background w-full min-h-235 flex flex-col justify-center items-center">
-      <h1 className="text-6xl text-heading font-semibold mt-30">
+    <div className="fade-zoom-in bg-background w-full min-h-screen flex flex-col justify-center items-center px-4">
+      <h1 className="text-4xl md:text-6xl text-heading font-semibold mt-20 text-center max-w-5xl">
         "Empowering Democracy, One Vote at a Time"
       </h1>
-      <h3 className="text-3xl text-heading font-light mt-2">
+      <h3 className="text-xl md:text-3xl text-heading font-light mt-4 text-center max-w-3xl">
         A secure and transparent way to cast your vote online. Join now and make
         your voice heard
       </h3>
-      
+
       <button class="btn mt-4 relative inline-flex items-center justify-start overflow-hidden font-medium transition-all bg-button rounded hover:bg-white group py-2.5 px-3.5">
         <span class="w-56 h-48 rounded bg-primary absolute bottom-0 left-0 translate-x-full ease-out duration-500 transition-all translate-y-full mb-9 ml-9 group-hover:ml-0 group-hover:mb-32 group-hover:translate-x-0"></span>
         <span class="relative w-full text-left text-text transition-colors duration-300 ease-in-out group-hover:text-blue-500">
@@ -20,7 +20,7 @@ const Index = () => {
       </button>
 
       {/* Cards  */}
-      <div className="flex flex-row justify-around gap-6 mt-10">
+      <div className="flex flex-wrap justify-center gap-6 mt-14">
         {/* Card #1  */}
         <div
           className="group max-w-sm p-6 border text-text rounded-lg shadow-sm bg-secondary border-gray-700 

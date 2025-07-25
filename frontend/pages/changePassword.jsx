@@ -37,7 +37,7 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="fade-zoom-in flex justify-center items-center min-h-235 bg-background px-4 py-12">
+    <div className="fade-zoom-in flex justify-center items-center min-h-[calc(100vh-4rem-5rem)]  bg-background px-4 py-12">
       <div className="bg-primary shadow-2xl rounded-2xl p-10 w-full max-w-xl">
         <h1 className="text-4xl font-bold text-text mb-8 border-b-4 border-zinc-600 pb-4 text-center">
           Change Password

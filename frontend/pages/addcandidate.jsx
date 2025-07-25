@@ -41,7 +41,7 @@ const Addcandidate = () => {
   };
 
   return (
-    <div className="min-h-236 w-full bg-background flex justify-center items-center px-4 py-10">
+    <div className="min-h-[calc(100vh-4rem-5rem)]  w-full bg-background flex justify-center items-center px-4 py-10">
       <div className="w-full max-w-lg  bg-secondary shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center  text-text mb-6">
           Add Candidate

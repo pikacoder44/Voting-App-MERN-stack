@@ -4,9 +4,10 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+/* globals.css */
+html,
 body {
-  overflow-x: hidden;
-  background-color: var(--color-background); /* Just to be safe */
+  height: 100%;
 }
 
 /* Define your theme tokens here */

@@ -233,7 +233,7 @@ const Candidates = () => {
   };
 
   return (
-    <div className="animate-slide-fade-in bg-background flex flex-col justify-center items-center w-full min-h-235 py-10 px-4">
+    <div className="animate-slide-fade-in bg-background flex flex-col justify-center items-center w-full min-h-[calc(100vh-4rem-6rem)]  py-10 px-4">
       <div className="max-w-6xl mx-auto text-center">
         <h1 className="text-5xl font-extrabold mb-8 text-primary">
           Candidates

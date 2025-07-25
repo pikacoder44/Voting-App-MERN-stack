@@ -2,128 +2,119 @@ import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
+
 const CandidatePage = () => {
+  const router = useRouter();
+  const { candidateId } = router.query;
+
+  const [candidate, setCandidate] = useState(null);
   const [name, setName] = useState("");
   const [party, setParty] = useState("");
   const [age, setAge] = useState("");
-  const router = useRouter();
-  const { candidateId } = router.query;
-  const [candidate, setCandidate] = useState(null);
 
+  // Fetch candidate by ID
   useEffect(() => {
     if (candidateId) {
       fetch(`${API_BASE}/candidate/${candidateId}`)
         .then((res) => res.json())
-        .then((data) => setCandidate(data.response))
-        .catch((err) => console.error(err));
+        .then((data) => {
+          setCandidate(data.response);
+          setName(data.response.name);
+          setParty(data.response.party);
+          setAge(data.response.age);
+        })
+        .catch((err) => console.error("Fetch error:", err));
     }
   }, [candidateId]);
 
-  useEffect(() => {
-    if (candidate) {
-      setName(candidate.name);
-      setAge(candidate.age);
-      setParty(candidate.party);
-    }
-  }, [candidate]);
-
-  const updateUser = async () => {
+  // Update handler
+  const updateCandidate = async () => {
     const token = localStorage.getItem("token");
+    const payload = { name, party, age };
+
     try {
-      const payload = { name, party, age };
-      const response = await fetch(
-        `${API_BASE}/candidate/${candidateId}`,
-        {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-          body: JSON.stringify(payload),
-        }
-      );
-      console.log(response);
-      if (response.ok) {
-        console.log("Candidate Updated Successfully");
-        alert("Candidate Updated Successfully");
+      const res = await fetch(`${API_BASE}/candidate/${candidateId}`, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        body: JSON.stringify(payload),
+      });
+
+      if (res.ok) {
+        alert("Candidate updated successfully");
         router.push("/candidates");
       } else {
-        console.log("Something went wrong");
-        alert("Something went wrong");
+        alert("Update failed");
       }
     } catch (err) {
-      console.log("Error: ", err);
+      console.error("Update error:", err);
     }
   };
 
-  if (!candidate) return <p>Loading...</p>;
+  if (!candidate) return <p className="text-center mt-10">Loading...</p>;
 
   return (
-    <div className="min-h-236 w-full bg-background flex justify-center items-center px-4 py-10">
-      <div className="w-full max-w-lg bg-secondary shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-text mb-6">
-          Edit Candidate
-        </h2>
+    <div className=" flex flex-col min-h-[calc(100vh-4rem-5rem)]  bg-background">
+      <main className="flex-grow flex justify-center items-center px-4 py-10">
+        <div className="w-full max-w-lg bg-secondary shadow-md rounded-lg p-6 sm:p-8">
+          <h2 className="text-3xl font-bold text-center text-text mb-6">
+            Edit Candidate
+          </h2>
 
-        <form className="space-y-5">
-          {/* Name OF CANDIDATE */}
-          <div className="flex flex-col justify-between gap-2 ">
-            <label
-              htmlFor="name"
-              className="block text-m font-semibold text-text m-2"
-            >
-              Name
-            </label>
-            <input
-              id="name"
-              type="text"
-              placeholder="Enter candidate's name"
-              className="w-full px-4 py-2 text-white placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            {/* Party OF CANDIDATE */}
-            <label
-              htmlFor="party"
-              className="block text-m font-semibold text-text m-2"
-            >
-              Party
-            </label>
-            <input
-              id="party"
-              type="text"
-              placeholder="Enter candidate's party"
-              className="w-full px-4 py-2 text-white placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={party}
-              onChange={(e) => setParty(e.target.value)}
-            />
-            <label
-              className="block text-m font-semibold text-text m-2"
-              htmlFor="age"
-            >
-              Age
-            </label>
-            <input
-              id="age"
-              type="number"
-              placeholder="Age"
-              className="w-full px-4 py-2 text-white placeholder-gray-400 border rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-400"
-              value={age}
-              onChange={(e) => setAge(e.target.value)}
-            />
-            {/* Submit Button */}
-            <div className="pt-2 text-center">
+          <form
+            className="space-y-5"
+            onSubmit={(e) => {
+              e.preventDefault();
+              updateCandidate();
+            }}
+          >
+            <div className="flex flex-col gap-4">
+              <label className="text-text font-medium">
+                Name
+                <input
+                  type="text"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                  placeholder="Enter candidate's name"
+                  className="mt-1 w-full px-4 py-2 bg-transparent border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </label>
+
+              <label className="text-text font-medium">
+                Party
+                <input
+                  type="text"
+                  value={party}
+                  onChange={(e) => setParty(e.target.value)}
+                  placeholder="Enter candidate's party"
+                  className="mt-1 w-full px-4 py-2 bg-transparent border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </label>
+
+              <label className="text-text font-medium">
+                Age
+                <input
+                  type="number"
+                  value={age}
+                  onChange={(e) => setAge(e.target.value)}
+                  placeholder="Age"
+                  className="mt-1 w-full px-4 py-2 bg-transparent border rounded-md text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                />
+              </label>
+
               <button
-                onClick={updateUser}
-                type="button"
-                className="w-40 cursor-pointer px-4 py-2 text-text hover:text-primary bg-button rounded-md hover:bg-accent font-semibold transition"
+                type="submit"
+                className="mt-4 w-full bg-button text-text hover:bg-accent hover:text-primary font-semibold py-2 rounded-md transition"
               >
                 Update
               </button>
             </div>
-          </div>
-        </form>
-      </div>
+          </form>
+        </div>
+      </main>
+
     </div>
   );
 };

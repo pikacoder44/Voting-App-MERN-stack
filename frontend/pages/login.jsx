@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/router";
 const API_BASE = process.env.NEXT_PUBLIC_API_URL;
 
@@ -40,7 +39,7 @@ const Login = () => {
   };
 
   return (
-    <div className="animate-fade-in min-h-236 w-full bg-background flex justify-center items-center px-4 py-10">
+    <div className="animate-fade-in min-h-[calc(100vh-4rem-5rem)]  w-full bg-background flex justify-center items-center px-4 py-10">
       <div className="w-full max-w-lg bg-secondary shadow-lg rounded-lg p-8">
         <h2 className="text-3xl font-bold text-center text-text mb-6">
           Login to Your Account
@@ -84,12 +83,12 @@ const Login = () => {
           </div>
 
           {/* Admin Toggle & Special Key */}
-          <div className="flex items-center gap-4">
+          <div className="flex justify-center items-center mt-6 mb-6 gap-2">
             <label
               htmlFor="admin-cb"
               className="text-sm font-semibold text-text"
             >
-              Admin
+              Are you an Admin?
             </label>
             <div className="relative inline-block w-11 h-5">
               <input
@@ -132,11 +131,14 @@ const Login = () => {
           {/* Submit Button */}
           <div className="pt-2 text-center">
             <button
-              type="button"
-              onClick={loginUser}
+              type="submit"
+              onClick={(e) => {
+                e.preventDefault();
+                loginUser();
+              }}
               className="w-full cursor-pointer px-4 py-2 text-text bg-button rounded-md hover:bg-accent hover:text-primary font-semibold transition"
             >
-              <Link href={"/"}>Login</Link>
+              Login
             </button>
           </div>
         </form>
