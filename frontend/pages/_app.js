@@ -39,7 +39,7 @@ const MyApp = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <link rel="icon" href="/main-logo.ico" />
+        <link rel="icon" href="/main-logo.png" />
         <title>Voting App By Hashir</title>
       </Head>
       <div className="flex flex-col min-h-screen">
