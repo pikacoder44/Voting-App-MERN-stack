@@ -2,6 +2,7 @@
 import React from "react";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import Head from "next/head";
 import "@/styles/globals.css";
 import { useEffect } from "react";
 import { jwtDecode } from "jwt-decode";
@@ -36,13 +37,19 @@ const MyApp = ({ Component, pageProps }) => {
     }
   }, []);
   return (
-    <div className="flex flex-col min-h-screen">
-      <Navbar />
-      <main className="flex-grow">
-        <Component {...pageProps} />
-      </main>
-      <Footer />
-    </div>
+    <>
+      <Head>
+        <link rel="icon" href="/main-logo.ico" />
+        <title>Voting App By Hashir</title>
+      </Head>
+      <div className="flex flex-col min-h-screen">
+        <Navbar />
+        <main className="flex-grow">
+          <Component {...pageProps} />
+        </main>
+        <Footer />
+      </div>
+    </>
   );
 };
 
