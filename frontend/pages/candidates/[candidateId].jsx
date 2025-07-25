@@ -58,9 +58,9 @@ const CandidatePage = () => {
   if (!candidate) return <p>Loading...</p>;
 
   return (
-    <div className="min-h-236 w-full bg-gray-100 flex justify-center items-center px-4 py-10">
-      <div className="w-full max-w-lg bg-white dark:bg-gray-700 shadow-lg rounded-lg p-8">
-        <h2 className="text-3xl font-bold text-center text-gray-800 dark:text-white mb-6">
+    <div className="min-h-236 w-full bg-background flex justify-center items-center px-4 py-10">
+      <div className="w-full max-w-lg bg-secondary shadow-lg rounded-lg p-8">
+        <h2 className="text-3xl font-bold text-center text-text mb-6">
           Edit Candidate
         </h2>
 
@@ -69,7 +69,7 @@ const CandidatePage = () => {
           <div className="flex flex-col justify-between gap-2 ">
             <label
               htmlFor="name"
-              className="block text-m font-semibold text-gray-700 dark:text-white m-2"
+              className="block text-m font-semibold text-text m-2"
             >
               Name
             </label>
@@ -84,7 +84,7 @@ const CandidatePage = () => {
             {/* Party OF CANDIDATE */}
             <label
               htmlFor="party"
-              className="block text-m font-semibold text-gray-700 dark:text-white m-2"
+              className="block text-m font-semibold text-text m-2"
             >
               Party
             </label>
@@ -97,7 +97,7 @@ const CandidatePage = () => {
               onChange={(e) => setParty(e.target.value)}
             />
             <label
-              className="block text-m font-semibold text-gray-700 dark:text-white m-2"
+              className="block text-m font-semibold text-text m-2"
               htmlFor="age"
             >
               Age
@@ -115,7 +115,7 @@ const CandidatePage = () => {
               <button
                 onClick={updateUser}
                 type="button"
-                className="w-40 cursor-pointer px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-700 font-semibold transition"
+                className="w-40 cursor-pointer px-4 py-2 text-text hover:text-primary bg-button rounded-md hover:bg-accent font-semibold transition"
               >
                 Update
               </button>

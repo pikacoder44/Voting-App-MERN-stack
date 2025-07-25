@@ -32,17 +32,18 @@ const UserProfile = () => {
   const isUserEmpty = Object.keys(user).length === 0;
 
   return (
-    <div className="flex justify-center items-center min-h-235 bg-gray-100 px-4">
-      <div className="bg-zinc-800 shadow-2xl rounded-2xl p-12 w-full max-w-3xl text-center">
-        <h1 className="text-5xl font-bold text-zinc-100 mb-10 border-b-4 border-zinc-600 pb-4">
+    <div className=" fade-zoom-in flex justify-center items-center min-h-235 bg-background px-4">
+      <div className="bg-primary shadow-2xl rounded-2xl p-12 w-full max-w-3xl text-center transition-transform duration-300 hover:scale-105">
+
+        <h1 className="text-5xl font-bold text-text mb-10 border-b-4 border-zinc-600 pb-4">
           Profile
         </h1>
         {isUserEmpty ? (
-          <h1 className="font-bol text-3xl text-white">
+          <h1 className="font-bol text-3xl text-error">
             Please Login to see Profile
           </h1>
         ) : (
-          <div className="space-y-6 text-2xl text-zinc-200">
+          <div className="space-y-6 text-2xl text-text">
             <div>
               <span className="font-semibold">Name:</span> {user.name || "—"}
             </div>

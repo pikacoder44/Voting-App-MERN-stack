@@ -4,9 +4,81 @@ input::-webkit-inner-spin-button {
   -webkit-appearance: none;
   margin: 0;
 }
+body {
+  overflow-x: hidden;
+  background-color: var(--color-background); /* Just to be safe */
+}
 
+/* Define your theme tokens here */
+@theme {
+  --color-primary: #212a31;
+  --color-secondary: #2e3944;
+  --color-accent: #748d92;
+  --color-background: #d3d9d4;
+  --color-heading: #212a31;
+  --color-button: #124e66;
+  --color-text: #e2e8f0;
+  --color-success: #10b981;
+  --color-error: #ef4444;
+}
+@keyframes dropdownAnim {
+  0% {
+    opacity: 0;
+    transform: scale(0.95) translateY(-10px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
 
-.dropDownProfile{
+@keyframes fade-in {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out;
+}
+
+.animate-dropdown {
+  animation: dropdownAnim 0.25s ease-out forwards;
+}
+
+@keyframes slide-fade-in {
+  from {
+    opacity: 0;
+    transform: translateX(50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+.animate-slide-fade-in {
+  animation: slide-fade-in 0.5s ease-out;
+}
+@keyframes fadeZoomIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.fade-zoom-in {
+  animation: fadeZoomIn 0.5s ease-out both;
+}
+
+.dropDownProfile {
   position: absolute;
   top: 4.5rem;
   right: 1.5rem;
@@ -17,8 +89,8 @@ input::-webkit-inner-spin-button {
   border: 1px solid gray;
 }
 
-.dropDownProfile::before{
-  content: '';
+.dropDownProfile::before {
+  content: "";
   position: absolute;
   top: -0.7rem;
   right: 1.1rem;

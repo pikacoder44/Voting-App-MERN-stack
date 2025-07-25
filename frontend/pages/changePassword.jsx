@@ -36,9 +36,9 @@ const ChangePassword = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-235 bg-gray-100 px-4 py-12">
-      <div className="bg-zinc-800 shadow-2xl rounded-2xl p-10 w-full max-w-xl">
-        <h1 className="text-4xl font-bold text-zinc-100 mb-8 border-b-4 border-zinc-600 pb-4 text-center">
+    <div className="fade-zoom-in flex justify-center items-center min-h-235 bg-background px-4 py-12">
+      <div className="bg-primary shadow-2xl rounded-2xl p-10 w-full max-w-xl">
+        <h1 className="text-4xl font-bold text-text mb-8 border-b-4 border-zinc-600 pb-4 text-center">
           Change Password
         </h1>
 
@@ -46,7 +46,7 @@ const ChangePassword = () => {
           <div>
             <label
               htmlFor="oldpassword"
-              className="block mb-2 text-zinc-200 font-semibold"
+              className="block mb-2 text-text font-semibold"
             >
               Old Password
             </label>
@@ -63,7 +63,7 @@ const ChangePassword = () => {
           <div>
             <label
               htmlFor="newpassword"
-              className="block mb-2 text-zinc-200 font-semibold"
+              className="block mb-2 text-text font-semibold"
             >
               New Password
             </label>

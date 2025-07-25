@@ -54,8 +54,8 @@ const Signup = () => {
   };
 
   return (
-    <div className="w-full min-h-236 bg-white flex justify-center items-center px-4 py-10">
-      <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-white dark:bg-gray-700 rounded-lg shadow-lg overflow-hidden">
+    <div className="animate-fade-in w-full min-h-236 bg-background flex justify-center items-center px-4 py-10">
+      <div className="flex flex-col lg:flex-row w-full max-w-6xl bg-secondary rounded-lg shadow-lg overflow-hidden">
         {/* Left Image */}
         <div
           className="hidden lg:block lg:w-5/12 bg-cover"
@@ -67,15 +67,15 @@ const Signup = () => {
 
         {/* Right Form */}
         <div className="w-full lg:w-7/12 p-8 flex flex-col justify-center items-center">
-          <h3 className="py-4 text-2xl text-center text-gray-800 dark:text-white">
+          <h3 className="py-4 text-2xl text-center text-text">
             Create an Account!
           </h3>
-          <form className="w-full px-8 pt-6 pb-8 mb-4 bg-white text-black rounded">
+          <form className="w-full px-8 pt-6 pb-8 mb-4 bg-white text-heading rounded">
             {/* Row 1: Name and Age */}
             <div className="flex justify-between mb-4 gap-5">
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="name"
                 >
                   Full Name
@@ -83,6 +83,7 @@ const Signup = () => {
                 <input
                   id="name"
                   type="text"
+                  required
                   placeholder="Full Name"
                   value={name}
                   onChange={(e) => setName(e.target.value)}
@@ -91,7 +92,7 @@ const Signup = () => {
               </div>
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="age"
                 >
                   Age
@@ -99,6 +100,7 @@ const Signup = () => {
                 <input
                   id="age"
                   type="number"
+                  required
                   placeholder="Age"
                   value={age}
                   onChange={(e) => setAge(e.target.value)}
@@ -111,7 +113,7 @@ const Signup = () => {
             <div className="flex justify-between mb-4 gap-5">
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="cnic"
                 >
                   CNIC
@@ -119,6 +121,7 @@ const Signup = () => {
                 <input
                   id="cnic"
                   type="text"
+                  required
                   placeholder="CNIC Number"
                   value={cnic}
                   onChange={(e) => setCnic(e.target.value)}
@@ -127,7 +130,7 @@ const Signup = () => {
               </div>
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="mobile"
                 >
                   Mobile Number
@@ -147,7 +150,7 @@ const Signup = () => {
             <div className="flex justify-between mb-4 gap-5">
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="email"
                 >
                   Email
@@ -163,7 +166,7 @@ const Signup = () => {
               </div>
               <div className="w-1/2">
                 <label
-                  className="block mb-2 text-sm font-bold text-black"
+                  className="block mb-2 text-sm font-bold text-heading"
                   htmlFor="password"
                 >
                   Password
@@ -172,6 +175,7 @@ const Signup = () => {
                   id="password"
                   type="password"
                   placeholder="******************"
+                  required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
                   className="w-full px-3 py-2 text-sm border rounded shadow focus:outline-none focus:shadow-outline"
@@ -181,12 +185,12 @@ const Signup = () => {
 
             {/* Admin Switch centered */}
             <div className="flex justify-center items-center mt-6 mb-6 gap-2">
-              <label className="text-sm font-bold text-black" htmlFor="admin">
+              <label className="text-sm font-bold text-heading" htmlFor="admin">
                 Admin
               </label>
               <div className="relative inline-block w-11 h-5">
                 <input
-                  id="admin-cb"
+                  id="admin"
                   type="checkbox"
                   checked={role === "admin"}
                   onChange={(e) => {
@@ -203,28 +207,36 @@ const Signup = () => {
                   className="absolute top-0 left-0 w-5 h-5 bg-white rounded-full border border-slate-300 shadow-sm transition-transform duration-300 peer-checked:translate-x-6 peer-checked:border-slate-800 cursor-pointer"
                 ></label>
               </div>
-              {role === "admin" && (
-                <div
-                  id="special"
-                  className="bg-green-500 text-white p-2 rounded-md"
-                >
-                  <label htmlFor="spec_key">Enter Special Key: </label>
-                  <input
-                    className="bg-white rounded-md border border-black text-black"
-                    type="password"
-                    name="spec_key"
-                    id="spec_key"
-                    value={specialkey}
-                    onChange={(e) => setSpecialKey(e.target.value)}
-                  />
-                </div>
-              )}
+              <div
+                className={`transition-all duration-500 ease-in-out overflow-hidden ${
+                  role === "admin"
+                    ? "opacity-100 max-h-40 scale-100 mt-4 translate-y-0"
+                    : "opacity-0 max-h-0 scale-95 -translate-y-2"
+                } bg-success text-white p-2 rounded-md`}
+              >
+                {role === "admin" && (
+                  <div
+                    id="special"
+                    className="bg-success text-white p-2 rounded-md"
+                  >
+                    <label htmlFor="spec_key">Enter Special Key: </label>
+                    <input
+                      className="bg-white rounded-md border border-black text-heading"
+                      type="password"
+                      name="spec_key"
+                      id="spec_key"
+                      value={specialkey}
+                      onChange={(e) => setSpecialKey(e.target.value)}
+                    />
+                  </div>
+                )}
+              </div>
             </div>
 
             {/* Register Button */}
             <div className="mb-6 text-center">
               <button
-                className="w-full cursor-pointer px-4 py-2 font-bold text-white bg-blue-500 rounded-full hover:bg-blue-700 focus:outline-none focus:shadow-outline"
+                className="w-full cursor-pointer px-4 py-2 font-bold text-text bg-button rounded-full hover:bg-accent hover:text-primary focus:outline-none focus:shadow-outline"
                 type="button"
                 onClick={registerUser}
               >

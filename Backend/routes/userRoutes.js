@@ -73,7 +73,7 @@ router.post("/login", async (req, res) => {
       return res.status(401).json({ error: "Invalid CNIC or password" });
     }
     // Check admin Legitmacy:
-    if (role === "admin") {
+    if (user.role === "admin") {
       if (specialkey !== process.env.JWT_SECRET) {
         return res
           .status(403)

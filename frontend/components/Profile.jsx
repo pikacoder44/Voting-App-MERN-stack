@@ -21,13 +21,13 @@ const Profile = ({ onClose }) => {
   };
 
   return (
-    <div className="absolute right-0 mt-2 w-40 bg-white border rounded-md shadow-md z-50 dark:bg-gray-800 dark:border-gray-700">
+    <div className="absolute right-0 mt-2 w-40 border rounded-md shadow-md z-50 bg-primary border-gray-700 animate-dropdown">
       <ul className="flex flex-col">
         <li>
           <Link
             href="/userProfile"
             onClick={onClose}
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
+            className="block px-4 py-2 transition-all duration-200 ease-in-out hover:bg-accent text-white hover:text-primary"
           >
             View Profile
           </Link>
@@ -36,7 +36,7 @@ const Profile = ({ onClose }) => {
           <Link
             href="/changePassword"
             onClick={onClose}
-            className="block px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-red-600"
+            className="block px-4 py-2 transition-all duration-200 ease-in-out hover:bg-accent text-red-600 hover:text-secondary"
           >
             Change Password
           </Link>
@@ -44,7 +44,7 @@ const Profile = ({ onClose }) => {
         <li>
           <button
             onClick={logoutUser}
-            className="w-full text-left px-4 py-2 hover:bg-gray-100 dark:hover:bg-gray-700 dark:text-white"
+            className="w-full text-left px-4 py-2 transition-all duration-200 ease-in-out hover:bg-accent text-white hover:text-primary"
           >
             Logout
           </button>

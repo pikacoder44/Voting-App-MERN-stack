@@ -32,7 +32,7 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white border-gray-200 dark:bg-gray-900">
+    <nav className="bg-white border-gray-200 dark:bg-primary">
       <div className="flex flex-wrap items-center justify-between mx-auto p-5">
         <Link href="/" className="text-2xl font-semibold dark:text-white">
           GOVT VOTING
@@ -43,11 +43,14 @@ const Navbar = () => {
             <Link
               key={item.path}
               href={item.path}
-              className={`py-2 px-3 rounded-sm ${
-                currentRoute === item.path
-                  ? "text-blue-700 font-semibold"
-                  : "text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500"
-              }`}
+              className={`py-2 px-3 rounded-sm hover:bg-gray-800
+ relative transition-all duration-300 ease-in-out transform
+    ${
+      currentRoute === item.path
+        ? "text-orange-500 font-semibold"
+        : " text-white  hover:text-accent hover:scale-105"
+    } 
+    before:absolute before:bottom-0 before:left-0 before:h-[2px] before:w-0 hover:before:w-full before:bg-orange-500 before:transition-all before:duration-300`}
             >
               {item.name}
             </Link>
@@ -57,7 +60,7 @@ const Navbar = () => {
           <div className="relative" ref={profileRef}>
             <button
               onClick={() => setOpenProfile((prev) => !prev)}
-              className="py-2 px-3 rounded-sm text-gray-900 hover:text-blue-700 dark:text-white dark:hover:text-blue-500"
+              className="py-2 px-3 rounded-sm text-white hover:text-accent transition-all duration-300 hover:scale-105"
             >
               Profile ▾
             </button>
