@@ -7,7 +7,7 @@ const Footer = () => {
       <div className="socials font-bold flex justify-around gap-2">
 
       <Link className=' hover:text-blue-300' href={"https://github.com/pikacoder44"}>Github</Link>
-      <Link className=' hover:text-blue-300' href={"https://github.com/pikacoder44"}>LinkedIn</Link>
+      <Link className=' hover:text-blue-300' href={"https://www.linkedin.com/in/syedmhashirali/"}>LinkedIn</Link>
       </div>
     </div>
   )
