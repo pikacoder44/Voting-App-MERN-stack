@@ -110,6 +110,8 @@ PASSWORD
 MONGODB_URL
 ```
 
+App is deployed on Vercel
+
 # ⚠️ Notes
 
 - Each user can vote only once.
